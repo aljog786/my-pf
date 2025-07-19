@@ -1,0 +1,11 @@
+@import "animate.css";
+@import './variable';
+
+body {
+  font-family: $font-family-base !important;
+  background-color: var(--bs-body-bg);
+  color: var(--bs-body-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+@import '~bootstrap/scss/bootstrap';
