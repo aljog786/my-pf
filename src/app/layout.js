@@ -23,9 +23,9 @@ export default function RootLayout({ children }) {
       <body className="d-flex flex-column min-vh-100">
         <ThemeProvider>
           <WaterBackground />
-          <div className="position-relative z-1">
+          <div className="position-relative z-1 d-flex flex-column flex-grow-1">
             <MainHeader />
-            <main>{children}</main>
+            <main className="flex-grow-1">{children}</main>
             <Footer />
           </div>
         </ThemeProvider>
@@ -33,3 +33,4 @@ export default function RootLayout({ children }) {
     </html>
   );
 }
+

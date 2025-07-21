@@ -12,17 +12,12 @@ import {
 import {
   FaEnvelope,
   FaPhoneAlt,
-  FaMapMarkerAlt,
-  FaLinkedin,
-  FaTwitter,
-  FaInstagram,
-  FaGithub,
+  FaMapMarkerAlt
 } from "react-icons/fa";
 
 export default function Contact() {
   return (
     <Container className="py-5 min-vh-100 overflow-hidden">
-      {/* Section Header */}
       <Row className="justify-content-center text-center mb-5">
         <Col xs={12} lg={8}>
           <h1 className="fw-bold display-4">
@@ -35,12 +30,15 @@ export default function Contact() {
         </Col>
       </Row>
 
-      <Row className="justify-content-center align-items-start g-5">
-        {/* Left Side: Contact Information */}
-        <Col xs={12} md={6} lg={5}>
+      <Row className="justify-content-center align-items-center g-5">
+        <Col
+          xs={12}
+          md={6}
+          lg={5}
+          className="d-flex flex-column justify-content-center align-items-center"
+        >
           <h5 className="fw-bold mb-4">Contact Information</h5>
           <ListGroup variant="flush" className="mb-4">
-            {/* Email */}
             <ListGroup.Item className="bg-transparent border-0 d-flex align-items-center px-0 py-2">
               <div className="me-3 p-2 bg-primary bg-opacity-10 rounded-circle">
                 <FaEnvelope className="text-primary fs-4" />
@@ -50,7 +48,6 @@ export default function Contact() {
                 <span className="text-muted">aljog786@gmail.com</span>
               </div>
             </ListGroup.Item>
-            {/* Phone */}
             <ListGroup.Item className="bg-transparent border-0 d-flex align-items-center px-0 py-2">
               <div className="me-3 p-2 bg-primary bg-opacity-10 rounded-circle">
                 <FaPhoneAlt className="text-primary fs-4" />
@@ -60,7 +57,6 @@ export default function Contact() {
                 <span className="text-muted">+91 (954) 489‑8287</span>
               </div>
             </ListGroup.Item>
-            {/* Location */}
             <ListGroup.Item className="bg-transparent border-0 d-flex align-items-center px-0 py-2">
               <div className="me-3 p-2 bg-primary bg-opacity-10 rounded-circle">
                 <FaMapMarkerAlt className="text-primary fs-4" />
@@ -71,24 +67,8 @@ export default function Contact() {
               </div>
             </ListGroup.Item>
           </ListGroup>
-
-          <h6 className="fw-bold mb-3">Connect With Me</h6>
-          <div className="d-flex gap-3">
-            {[FaLinkedin, FaTwitter, FaInstagram, FaGithub].map((Icon, i) => (
-              <a
-                key={i}
-                href="#"
-                className="text-body-secondary fs-4" // Use theme-aware color
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Icon />
-              </a>
-            ))}
-          </div>
         </Col>
 
-        {/* Right Side: Contact Form */}
         <Col xs={12} md={6} lg={5}>
           <Card className="rounded-4 shadow-lg border-0 bg-body-tertiary">
             <Card.Body className="p-4 p-lg-5">

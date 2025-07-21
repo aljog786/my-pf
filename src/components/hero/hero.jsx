@@ -18,9 +18,9 @@ export default function Hero() {
           className="align-self-center"
         >
           <div className="d-flex flex-column align-items-center">
-            <h1 className="text-center ">
+            <h1 className="text-center">
               <span className="fw-semibold"> Hi, I&apos;m</span>
-              <span className="text-primary display-2 fw-bolder">
+              <span className="text-primary display-2 fw-bolder animate__animated animate__fadeIn">
                 {" "}
                 ALJO GEORGE
               </span>

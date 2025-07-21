@@ -1,14 +1,36 @@
 "use client";
-
+import { useTheme } from "@/context/ThemeContext";
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
 import { FaCode, FaPalette, FaProjectDiagram } from "react-icons/fa";
 import "../about/page.scss";
 
 export default function AboutPage() {
+  const { isDark } = useTheme();
+  const cardContents = [
+    {
+      title: "Web Development",
+      desc: "Creating responsive websites and web applications with modern frameworks.",
+      logo: <FaCode size={30} className="text-primary" />,
+    },
+    {
+      title: "UI/UX Design",
+      desc: "Designing intuitive user interfaces and seamless user experiences.",
+      logo: <FaPalette size={30} className="text-primary" />,
+    },
+    {
+      title: "Project Management",
+      desc: "Leading projects from conception to completion with agile methodologies.",
+      logo: <FaProjectDiagram size={30} className="text-primary" />,
+    },
+  ];
   return (
-    <section className="text-white text-center py-5">
+    <section className="text-white text-center">
       <Container>
-        <h2 className="fw-bold display-5 mb-4">
+        <h2
+          className={`fw-bold display-5 mb-4 ${
+            isDark ? "text-white" : "text-dark"
+          }`}
+        >
           About <span className="text-primary">Me</span>
         </h2>
         <Row>
@@ -37,47 +59,27 @@ export default function AboutPage() {
               </Button>
             </div>
           </Col>
-          <Col xs={12} md={10} lg={6} className="d-flex flex-column  mx-auto">
-            <Card className="shadow-lg border-0 rounded-4 text-start p-3 my-2 hover-scale">
-              <Card.Body className="d-flex align-items-start gap-3">
-                <FaCode className="text-primary fs-2" />
-                <div>
-                  <Card.Title className="fw-bold mb-1">
-                    Web Development
-                  </Card.Title>
-                  <Card.Text>
-                    Creating responsive websites and web applications with
-                    modern frameworks.
-                  </Card.Text>
-                </div>
-              </Card.Body>
-            </Card>
-            <Card className="shadow-lg border-0 rounded-4 text-start p-3 my-2 hover-scale">
-              <Card.Body className="d-flex align-items-start gap-3">
-                <FaPalette className="text-primary fs-2" />
-                <div>
-                  <Card.Title className="fw-bold mb-1">UI/UX Design</Card.Title>
-                  <Card.Text>
-                    Designing intuitive user interfaces and seamless user
-                    experiences.
-                  </Card.Text>
-                </div>
-              </Card.Body>
-            </Card>
-            <Card className="shadow-lg border-0 rounded-4 text-start p-3 my-2 hover-scale">
-              <Card.Body className="d-flex align-items-start gap-3">
-                <FaProjectDiagram className="text-primary fs-2" />
-                <div>
-                  <Card.Title className="fw-bold mb-1">
-                    Project Management
-                  </Card.Title>
-                  <Card.Text>
-                    Leading projects from conception to completion with agile
-                    methodologies.
-                  </Card.Text>
-                </div>
-              </Card.Body>
-            </Card>
+          <Col xs={12} md={10} lg={6} className="d-flex flex-column mx-auto">
+            {cardContents.map((content, index) => (
+              <Card
+                key={index}
+                className={`shadow-lg border-0 rounded-4 text-start p-3 my-2 hover-scale ${
+                  isDark ? "bg-white" : "bg-dark"
+                }`}
+              >
+                <Card.Body className="d-flex align-items-start gap-3">
+                  {content.logo}
+                  <div>
+                    <Card.Title className="fw-bold mb-1 text-primary">
+                      {content.title}
+                    </Card.Title>
+                    <Card.Text className="text-primary">
+                      {content.desc}
+                    </Card.Text>
+                  </div>
+                </Card.Body>
+              </Card>
+            ))}
           </Col>
         </Row>
       </Container>
