@@ -8,7 +8,7 @@ import {
   Card,
   ProgressBar,
 } from "react-bootstrap";
-import '../skills-section/SkillSection.scss';
+import "../skills-section/SkillSection.scss";
 
 const skills = [
   // Frontend
@@ -42,7 +42,7 @@ export default function SkillsSection() {
   });
 
   return (
-    <section className="min-vh-100 py-5">
+    <section className="position-relative min-vh-100 py-5">
       <Container>
         <h2 className="text-center fw-bold mb-4 display-5">
           My <span className="text-primary">Skills</span>

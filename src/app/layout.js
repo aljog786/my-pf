@@ -2,9 +2,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "../styles/_global.scss";
 import MainHeader from "@/components/main-header/main-header.js";
 import WaterBackground from "@/components/background/water-background.jsx";
-import { Montserrat } from "next/font/google";
 import Footer from "@/components/footer/footer.jsx";
-import { ThemeProvider } from "@/context/ThemeContext";
+import Providers from "@/components/providers/Providers"; // NEW
+import { Montserrat } from "next/font/google";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -21,16 +21,15 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" data-bs-theme="light" className={montserrat.className}>
       <body className="d-flex flex-column min-vh-100">
-        <ThemeProvider>
+        <Providers>
           <WaterBackground />
           <div className="position-relative z-1 d-flex flex-column flex-grow-1">
             <MainHeader />
             <main className="flex-grow-1">{children}</main>
             <Footer />
           </div>
-        </ThemeProvider>
+        </Providers>
       </body>
     </html>
   );
 }
-

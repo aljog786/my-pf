@@ -3,12 +3,32 @@ import { useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import { FaLinkedin, FaGoogle, FaGithub } from "react-icons/fa";
 import { FaSquareXTwitter } from "react-icons/fa6";
+import { useRegisterMutation } from "@/slices/usersApiSlice";
+
 
 export default function RegisterForm({ onSwitchTab }) {
+  const [register, { isLoading }] = useRegisterMutation();
+
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   const registerHandler = async (e) => {
     e.preventDefault();
-    // handle registration
+
+    if (password !== confirmPassword) {
+      alert("Passwords do not match");
+      return;
+    }
+
+    try {
+      const res = await register({ name, email, password }).unwrap();
+      alert("Registered successfully!");
+      onSwitchTab("login");
+    } catch (err) {
+      alert(err?.data?.error || err.message || "Registration failed");
+    }
   };
 
   return (
@@ -24,19 +44,40 @@ export default function RegisterForm({ onSwitchTab }) {
 
       <Form onSubmit={registerHandler}>
         <Form.Group className="mb-3">
-          <Form.Control type="text" placeholder="Name" />
+          <Form.Control
+            type="text"
+            placeholder="Name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
+          />
         </Form.Group>
         <Form.Group className="mb-3">
-          <Form.Control type="text" placeholder="Username" />
+          <Form.Control
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
         </Form.Group>
         <Form.Group className="mb-3">
-          <Form.Control type="email" placeholder="Email" />
+          <Form.Control
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
         </Form.Group>
         <Form.Group className="mb-3">
-          <Form.Control type="password" placeholder="Password" />
-        </Form.Group>
-        <Form.Group className="mb-3">
-          <Form.Control type="password" placeholder="Repeat password" />
+          <Form.Control
+            type="password"
+            placeholder="Repeat password"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            required
+          />
         </Form.Group>
         <Form.Check
           type="checkbox"
@@ -44,8 +85,13 @@ export default function RegisterForm({ onSwitchTab }) {
           className="text-white mb-3"
           defaultChecked
         />
-        <Button type="submit" variant="primary" className="w-100">
-          Register
+        <Button
+          type="submit"
+          variant="primary"
+          className="w-100"
+          disabled={isLoading}
+        >
+          {isLoading ? "Registering..." : "Register"}
         </Button>
         <p className="text-center text-white mt-3">
           Already a member?{" "}
