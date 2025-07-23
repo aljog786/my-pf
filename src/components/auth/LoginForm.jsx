@@ -3,19 +3,30 @@ import { useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import { FaLinkedin, FaGoogle, FaGithub } from "react-icons/fa";
 import { FaSquareXTwitter } from "react-icons/fa6";
-
+import { useLoginMutation } from "@/slices/usersApiSlice";
+import { useDispatch } from "react-redux";
+import { setCredentials } from "@/slices/authSlice";
+import { useRouter } from "next/navigation";
 
 export default function LoginForm({ onSwitchTab }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [login, { isLoading }] = useLoginMutation();
+
+  const dispatch = useDispatch();
+
+  const router = useRouter();
 
   const loginHandler = async (e) => {
     e.preventDefault();
     try {
       const res = await login({ email, password }).unwrap();
-      // handle success
+      dispatch(setCredentials(res));
+      console.log("User logged in:", res);
+      router.push("/");
     } catch (err) {
-      // handle error
+      console.error("Login failed", err?.data?.message || err.error);
+      alert(err?.data?.message || "Login failed");
     }
   };
 
@@ -62,8 +73,9 @@ export default function LoginForm({ onSwitchTab }) {
           type="submit"
           variant="primary"
           className="bg-gradient border-0 w-100"
+          disabled={isLoading}
         >
-          Login
+          {isLoading ? "Logging in..." : "Login"}
         </Button>
       </Form>
       <p className="text-center text-white mt-3">
