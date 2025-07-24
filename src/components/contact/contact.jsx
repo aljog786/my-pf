@@ -10,11 +10,7 @@ import {
   Button,
   Form,
 } from "react-bootstrap";
-import {
-  FaEnvelope,
-  FaPhoneAlt,
-  FaMapMarkerAlt
-} from "react-icons/fa";
+import { FaEnvelope, FaPhoneAlt, FaMapMarkerAlt } from "react-icons/fa";
 
 export default function Contact() {
   const [formData, setFormData] = useState({

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 export default function NavLink({ href, children, className = "", onClick }) {
+  
   const path = usePathname();
   const isActive = path === href;
 
