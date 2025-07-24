@@ -25,6 +25,14 @@ const cardContents = [
 export default function AboutPage() {
   const { isDark } = useTheme();
 
+  const handleDownload = () => {
+    window.open(
+      "https://drive.google.com/file/d/1cXQF6GiVwQ32amlvLAA_Y1yKdcJGKJN_/view?usp=sharing",
+      "_blank"
+    );
+    
+  }
+
   return (
     <section className="text-white text-center">
       <Container>
@@ -59,8 +67,7 @@ export default function AboutPage() {
               <Button
                 variant="outline-primary"
                 className="px-4 rounded-pill"
-                href="/cv-aljo.pdf"
-                download
+                onClick={handleDownload}
               >
                 Download CV
               </Button>
