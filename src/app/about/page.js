@@ -4,25 +4,32 @@ import { Container, Row, Col, Card, Button } from "react-bootstrap";
 import { FaCode, FaPalette, FaProjectDiagram } from "react-icons/fa";
 import "../about/page.scss";
 
+const cardContents = [
+  {
+    title: "Web Development",
+    desc: "Creating responsive websites and web applications with modern frameworks.",
+    logo: <FaCode size={30} className="text-primary" />,
+  },
+  {
+    title: "UI/UX Design",
+    desc: "Designing intuitive user interfaces and seamless user experiences.",
+    logo: <FaPalette size={30} className="text-primary" />,
+  },
+  {
+    title: "Project Management",
+    desc: "Leading projects from conception to completion with agile methodologies.",
+    logo: <FaProjectDiagram size={30} className="text-primary" />,
+  },
+];
+
 export default function AboutPage() {
   const { isDark } = useTheme();
-  const cardContents = [
-    {
-      title: "Web Development",
-      desc: "Creating responsive websites and web applications with modern frameworks.",
-      logo: <FaCode size={30} className="text-primary" />,
-    },
-    {
-      title: "UI/UX Design",
-      desc: "Designing intuitive user interfaces and seamless user experiences.",
-      logo: <FaPalette size={30} className="text-primary" />,
-    },
-    {
-      title: "Project Management",
-      desc: "Leading projects from conception to completion with agile methodologies.",
-      logo: <FaProjectDiagram size={30} className="text-primary" />,
-    },
-  ];
+
+  const handleDownload = () => {
+    window.open("http://localhost:3000/cv-aljo.pdf", "_blank");
+    
+  }
+
   return (
     <section className="text-white text-center">
       <Container>
@@ -54,7 +61,7 @@ export default function AboutPage() {
               <Button variant="primary" className="px-4 rounded-pill">
                 Get In Touch
               </Button>
-              <Button variant="outline-primary" className="px-4 rounded-pill">
+              <Button variant="outline-primary" className="px-4 rounded-pill" onClick={handleDownload}>
                 Download CV
               </Button>
             </div>
