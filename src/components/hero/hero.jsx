@@ -7,14 +7,12 @@ export default function Hero() {
     <Container
       as="section"
       className="min-vh-100 d-flex flex-column justify-content-center"
+      fluid
     >
-      <Row className="justify-content-center w-100">
+      <Row className="justify-content-center align-self-center w-100">
         <Col
-          xs={12}
-          sm={10}
           md={12}
           lg={10}
-          xl={8}
           className="align-self-center"
         >
           <div className="d-flex flex-column align-items-center">
@@ -25,7 +23,7 @@ export default function Hero() {
                 ALJO GEORGE
               </span>
             </h1>
-            <p className="text-center fs-5 mx-3">
+            <p className="text-center fs-5 px-3">
               I create web experiences with modern technologies. Specializing in
               front-end development, I build interfaces that are beautiful,
               functional and advanced.

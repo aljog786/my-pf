@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import {
   Container,
   Row,
@@ -16,6 +17,49 @@ import {
 } from "react-icons/fa";
 
 export default function Contact() {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(null);
+
+  const handleChange = (e) => {
+    setFormData((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setSuccess(null);
+
+    try {
+      const res = await fetch("/api/mailer", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await res.json();
+      if (data.success) {
+        setSuccess("Message sent successfully!");
+        setFormData({ name: "", email: "", message: "" });
+      } else {
+        setSuccess("Failed to send message. Please try again.");
+      }
+    } catch (err) {
+      setSuccess("An error occurred. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <Container className="py-5 min-vh-100 overflow-hidden">
       <Row className="justify-content-center text-center mb-5">
@@ -75,14 +119,29 @@ export default function Contact() {
               <Card.Title as="h5" className="fw-bold text-center mb-4">
                 Send a Message
               </Card.Title>
-              <Form>
+
+              <Form onSubmit={handleSubmit}>
                 <Form.Group className="mb-3">
                   <Form.Label className="fw-semibold">Your Name</Form.Label>
-                  <Form.Control type="text" placeholder="Your name" />
+                  <Form.Control
+                    type="text"
+                    placeholder="Your name"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    required
+                  />
                 </Form.Group>
                 <Form.Group className="mb-3">
                   <Form.Label className="fw-semibold">Your Email</Form.Label>
-                  <Form.Control type="email" placeholder="example@email.com" />
+                  <Form.Control
+                    type="email"
+                    placeholder="example@email.com"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    required
+                  />
                 </Form.Group>
                 <Form.Group className="mb-4">
                   <Form.Label className="fw-semibold">Your Message</Form.Label>
@@ -90,15 +149,30 @@ export default function Contact() {
                     as="textarea"
                     rows={4}
                     placeholder="Hello, I'd like to talk about..."
+                    name="message"
+                    value={formData.message}
+                    onChange={handleChange}
+                    required
                   />
                 </Form.Group>
                 <Button
                   type="submit"
                   variant="primary"
                   className="w-100 rounded-pill"
+                  disabled={loading}
                 >
-                  Send Message
+                  {loading ? "Sending..." : "Send Message"}
                 </Button>
+
+                {success && (
+                  <p
+                    className={`mt-3 fw-semibold text-center text-${
+                      success.includes("successfully") ? "success" : "danger"
+                    }`}
+                  >
+                    {success}
+                  </p>
+                )}
               </Form>
             </Card.Body>
           </Card>
