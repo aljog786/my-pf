@@ -25,11 +25,6 @@ const cardContents = [
 export default function AboutPage() {
   const { isDark } = useTheme();
 
-  const handleDownload = () => {
-    window.open("http://localhost:3000/cv-aljo.pdf", "_blank");
-    
-  }
-
   return (
     <section className="text-white text-center">
       <Container>
@@ -61,7 +56,12 @@ export default function AboutPage() {
               <Button variant="primary" className="px-4 rounded-pill">
                 Get In Touch
               </Button>
-              <Button variant="outline-primary" className="px-4 rounded-pill" onClick={handleDownload}>
+              <Button
+                variant="outline-primary"
+                className="px-4 rounded-pill"
+                href="/cv-aljo.pdf"
+                download
+              >
                 Download CV
               </Button>
             </div>
