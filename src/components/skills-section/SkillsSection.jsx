@@ -69,10 +69,10 @@ export default function SkillsSection() {
         {/* Skills Grid */}
         <Row className="g-4">
           {filteredSkills.map((skill, index) => (
-            <Col key={index} xs={12} md={6} lg={4}>
+            <Col key={index} xs={12} md={6} lg={4} className="">
               <Card
-                className={`h-100 rounded-4 border-0 hover-scale ${
-                  isDark ? "bg-white text-dark" : "bg-dark text-light"
+                className={`h-100 rounded-4 border-1 hover-scale ${
+                  isDark ? "bg-transparent text-dark" : "bg-dark text-light"
                 }`}
               >
                 <Card.Body className="p-4 d-flex flex-column">

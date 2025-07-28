@@ -55,7 +55,6 @@ const WaterBackground = () => {
       className="position-fixed w-100 h-100 top-0 start-0 overflow-hidden z-0"
       style={{ pointerEvents: "none" }}
     >
-      {/* Gradient Background */}
       <div
         className="position-absolute top-0 start-0 w-100 h-100"
         style={{
@@ -64,7 +63,6 @@ const WaterBackground = () => {
         }}
       />
 
-      {/* Waves */}
       <div
         ref={waveRef1}
         className="position-absolute w-100"
@@ -99,7 +97,6 @@ const WaterBackground = () => {
         }}
       />
 
-      {/* Bubbles */}
       {bubbles.map((bubble) => (
         <div
           key={bubble.id}
@@ -116,7 +113,6 @@ const WaterBackground = () => {
         />
       ))}
 
-      {/* Bubble Animation Keyframes */}
       <style jsx>{`
         @keyframes rise {
           0% {

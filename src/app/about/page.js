@@ -27,11 +27,10 @@ export default function AboutPage() {
 
   const handleDownload = () => {
     window.open(
-      "https://drive.google.com/file/d/1cXQF6GiVwQ32amlvLAA_Y1yKdcJGKJN_/view?usp=sharing",
+      "https://drive.google.com/file/d/1C9XjQRgrbhIL418W_CEIQR5CrEyKRX5l/view?usp=sharing",
       "_blank"
     );
-    
-  }
+  };
 
   return (
     <section className="text-white text-center">
@@ -78,7 +77,7 @@ export default function AboutPage() {
               <Card
                 key={index}
                 className={`shadow-lg border-0 rounded-4 text-start p-3 my-2 hover-scale ${
-                  isDark ? "bg-white" : "bg-dark"
+                  isDark ? "bg-transparent" : "bg-dark"
                 }`}
               >
                 <Card.Body className="d-flex align-items-start gap-3">

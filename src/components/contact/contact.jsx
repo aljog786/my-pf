@@ -1,5 +1,5 @@
 "use client";
-
+import { useTheme } from "@/context/ThemeContext";
 import { useState } from "react";
 import {
   Container,
@@ -13,6 +13,7 @@ import {
 import { FaEnvelope, FaPhoneAlt, FaMapMarkerAlt } from "react-icons/fa";
 
 export default function Contact() {
+  const {isDark} = useTheme();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -110,17 +111,31 @@ export default function Contact() {
         </Col>
 
         <Col xs={12} md={6} lg={5}>
-          <Card className="rounded-4 shadow-lg border-0 bg-body-tertiary">
+          <Card
+            className={`rounded-4 shadow-lg border-0 ${
+              isDark ? "bg-transparent" : "bg-dark bg-gradient"
+            }`}
+          >
             <Card.Body className="p-4 p-lg-5">
-              <Card.Title as="h5" className="fw-bold text-center mb-4">
+              <Card.Title
+                as="h5"
+                className="fw-bold text-white text-center mb-4"
+              >
                 Send a Message
               </Card.Title>
 
               <Form onSubmit={handleSubmit}>
                 <Form.Group className="mb-3">
-                  <Form.Label className="fw-semibold">Your Name</Form.Label>
+                  <Form.Label className="fw-semibold text-white">
+                    Your Name
+                  </Form.Label>
                   <Form.Control
                     type="text"
+                    className={`${
+                      isDark
+                        ? "bg-transparent"
+                        : "bg-dark bg-gradient text-white"
+                    }`}
                     placeholder="Your name"
                     name="name"
                     value={formData.name}
@@ -129,9 +144,16 @@ export default function Contact() {
                   />
                 </Form.Group>
                 <Form.Group className="mb-3">
-                  <Form.Label className="fw-semibold">Your Email</Form.Label>
+                  <Form.Label className="fw-semibold text-white">
+                    Your Email
+                  </Form.Label>
                   <Form.Control
                     type="email"
+                    className={`${
+                      isDark
+                        ? "bg-transparent"
+                        : "bg-dark bg-gradient text-white"
+                    }`}
                     placeholder="example@email.com"
                     name="email"
                     value={formData.email}
@@ -140,9 +162,16 @@ export default function Contact() {
                   />
                 </Form.Group>
                 <Form.Group className="mb-4">
-                  <Form.Label className="fw-semibold">Your Message</Form.Label>
+                  <Form.Label className="fw-semibold text-white">
+                    Your Message
+                  </Form.Label>
                   <Form.Control
                     as="textarea"
+                    className={`${
+                      isDark
+                        ? "bg-transparent"
+                        : "bg-dark bg-gradient text-white"
+                    }`}
                     rows={4}
                     placeholder="Hello, I'd like to talk about..."
                     name="message"

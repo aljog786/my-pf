@@ -1,10 +1,9 @@
 "use client";
+import { signIn } from "next-auth/react";
 import { useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import { FaLinkedin, FaGoogle, FaGithub } from "react-icons/fa";
-import { FaSquareXTwitter } from "react-icons/fa6";
 import { useRegisterMutation } from "@/slices/usersApiSlice";
-
 
 export default function RegisterForm({ onSwitchTab }) {
   const [register, { isLoading }] = useRegisterMutation();
@@ -35,11 +34,23 @@ export default function RegisterForm({ onSwitchTab }) {
     <>
       <h5 className="text-center text-white mb-3">Sign up with:</h5>
       <div className="d-flex justify-content-center gap-3 mb-3">
-        <FaGoogle className="text-primary fs-5" />
-        <FaLinkedin className="text-primary fs-5" />
-        <FaGithub className="text-primary fs-5" />
-        <FaSquareXTwitter className="text-primary fs-5" />
+        <FaGoogle
+          className="text-primary fs-5"
+          role="button"
+          onClick={() => signIn("google")}
+        />
+        <FaLinkedin
+          className="text-primary fs-5"
+          role="button"
+          onClick={() => signIn("linkedin")}
+        />
+        <FaGithub
+          className="text-primary fs-5"
+          role="button"
+          onClick={() => signIn("github")}
+        />
       </div>
+
       <p className="text-center text-white mb-3">or:</p>
 
       <Form onSubmit={registerHandler}>

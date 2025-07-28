@@ -67,16 +67,18 @@ export default function ProjectsSection() {
               sm={12}
               className="d-flex align-items-stretch"
             >
-              <Card className="shadow-lg rounded-4 overflow-hidden border-0 hover-scale">
-                <div className="ratio ratio-16x9">
+              <Card className="shadow-lg rounded-4 overflow-hidden border-0 hover-scale bg-transparent">
+                <div className="ratio ratio-16x9 ">
                   <Image
                     src={project.image}
                     alt={project.title}
-                    className="object-fit-cover"
+                    className="rounded-5 p-3 object-fit-cover"
                     fill
                   />
                 </div>
-                <Card.Body className={`${isDark ? "bg-white" : "bg-dark"}`}>
+                <Card.Body
+                  className={`${isDark ? "bg-transparent" : "bg-dark"}`}
+                >
                   <Card.Title className={`fw-bold text-primary`}>
                     {project.title}
                   </Card.Title>
