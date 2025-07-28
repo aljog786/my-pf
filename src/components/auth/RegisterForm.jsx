@@ -56,6 +56,7 @@ export default function RegisterForm({ onSwitchTab }) {
       <Form onSubmit={registerHandler}>
         <Form.Group className="mb-3">
           <Form.Control
+            className={`bg-transparent border-0 bg-gradient`}
             type="text"
             placeholder="Name"
             value={name}
@@ -65,6 +66,7 @@ export default function RegisterForm({ onSwitchTab }) {
         </Form.Group>
         <Form.Group className="mb-3">
           <Form.Control
+            className="bg-transparent border-0 bg-gradient"
             type="email"
             placeholder="Email"
             value={email}
@@ -74,6 +76,7 @@ export default function RegisterForm({ onSwitchTab }) {
         </Form.Group>
         <Form.Group className="mb-3">
           <Form.Control
+            className="bg-transparent border-0 bg-gradient"
             type="password"
             placeholder="Password"
             value={password}
@@ -83,6 +86,7 @@ export default function RegisterForm({ onSwitchTab }) {
         </Form.Group>
         <Form.Group className="mb-3">
           <Form.Control
+            className="bg-transparent border-0 bg-gradient"
             type="password"
             placeholder="Repeat password"
             value={confirmPassword}

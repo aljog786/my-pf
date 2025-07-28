@@ -34,27 +34,28 @@ export default function LoginForm({ onSwitchTab }) {
     <>
       <h5 className="text-center text-white mb-3">Sign in with:</h5>
       <div className="d-flex justify-content-center gap-3 mb-3">
-              <FaGoogle
-                className="text-primary fs-5"
-                role="button"
-                onClick={() => signIn("google")}
-              />
-              <FaLinkedin
-                className="text-primary fs-5"
-                role="button"
-                onClick={() => signIn("linkedin")}
-              />
-              <FaGithub
-                className="text-primary fs-5"
-                role="button"
-                onClick={() => signIn("github")}
-              />
-            </div>
+        <FaGoogle
+          className="text-primary fs-5"
+          role="button"
+          onClick={() => signIn("google")}
+        />
+        <FaLinkedin
+          className="text-primary fs-5"
+          role="button"
+          onClick={() => signIn("linkedin")}
+        />
+        <FaGithub
+          className="text-primary fs-5"
+          role="button"
+          onClick={() => signIn("github")}
+        />
+      </div>
       <p className="text-center mb-3 text-white">or</p>
 
       <Form onSubmit={loginHandler}>
         <Form.Group className="mb-3">
           <Form.Control
+            className="bg-transparent border-0 bg-gradient"
             type="email"
             placeholder="Email or username"
             value={email}
@@ -63,6 +64,7 @@ export default function LoginForm({ onSwitchTab }) {
         </Form.Group>
         <Form.Group className="mb-3">
           <Form.Control
+            className="bg-transparent border-0 bg-gradient"
             type="password"
             placeholder="Password"
             value={password}
@@ -83,7 +85,7 @@ export default function LoginForm({ onSwitchTab }) {
         <Button
           type="submit"
           variant="primary"
-          className="bg-gradient border-0 w-100"
+          className="bg-primary bg-gradient border-0 w-100"
           disabled={isLoading}
         >
           {isLoading ? "Logging in..." : "Login"}

@@ -29,6 +29,11 @@ const handler = NextAuth({
       session.user.id = token.sub;
       return session;
     },
+    async signIn({ user, account, profile }) {
+      // Optional: you can log info here if needed
+      console.log("OAuth login", { user, account, profile });
+      return true;
+    },
   },
 });
 
