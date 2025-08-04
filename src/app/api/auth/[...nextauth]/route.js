@@ -2,6 +2,8 @@ import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import GitHubProvider from "next-auth/providers/github";
 import LinkedInProvider from "next-auth/providers/linkedin";
+import User from "@/models/User";
+import connectDB from "@/lib/db";
 
 const handler = NextAuth({
   providers: [
@@ -19,20 +21,38 @@ const handler = NextAuth({
     }),
   ],
   pages: {
-    signIn: "/auth", // points to your custom login/register page
+    signIn: "/auth",
   },
   session: {
     strategy: "jwt",
   },
   callbacks: {
+    async signIn({ user, account, profile }) {
+      try {
+        await connectDB(); // ensure DB is connected
+
+        const existingUser = await User.findOne({ email: user.email });
+
+        if (!existingUser) {
+          // You can modify this schema as needed
+          await User.create({
+            name: user.name || profile.name,
+            email: user.email,
+            password: "oauth_dummy_password", // dummy value, you won't use it
+            isAdmin: false,
+          });
+        }
+
+        return true;
+      } catch (err) {
+        console.error("Error saving OAuth user:", err);
+        return false;
+      }
+    },
+
     async session({ session, token }) {
       session.user.id = token.sub;
       return session;
-    },
-    async signIn({ user, account, profile }) {
-      // Optional: you can log info here if needed
-      console.log("OAuth login", { user, account, profile });
-      return true;
     },
   },
 });

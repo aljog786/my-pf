@@ -55,7 +55,7 @@ export default function LoginForm({ onSwitchTab }) {
       <Form onSubmit={loginHandler}>
         <Form.Group className="mb-3">
           <Form.Control
-            className="bg-transparent border-0 bg-gradient"
+            className="bg-transparent border-0 bg-gradient text-white"
             type="email"
             placeholder="Email or username"
             value={email}
@@ -64,7 +64,7 @@ export default function LoginForm({ onSwitchTab }) {
         </Form.Group>
         <Form.Group className="mb-3">
           <Form.Control
-            className="bg-transparent border-0 bg-gradient"
+            className="bg-transparent border-0 bg-gradient text-white"
             type="password"
             placeholder="Password"
             value={password}

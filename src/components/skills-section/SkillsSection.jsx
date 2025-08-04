@@ -49,12 +49,12 @@ export default function SkillsSection() {
         </h2>
 
         {/* Filter Buttons */}
-        <div className="d-flex justify-content-center align-items-center gap-2 mb-5 flex-wrap">
+        <div className="d-flex justify-content-center align-items-center mb-5 flex-nowrap ">
           {categories.map((category) => (
             <Button
               key={category}
               variant="link"
-              className={`text-decoration-none rounded-pill fw-medium px-4 py-2 ${
+              className={`text-decoration-none rounded-pill fw-medium ${
                 activeCategory === category
                   ? "bg-primary text-white"
                   : "text-white-50"

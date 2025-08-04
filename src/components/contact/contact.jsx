@@ -113,29 +113,25 @@ export default function Contact() {
         <Col xs={12} md={6} lg={5}>
           <Card
             className={`rounded-4 shadow-lg border-0 ${
-              isDark ? "bg-transparent" : "bg-dark bg-gradient"
+              isDark ? "bg-transparent" : " bg-white bg-gradient"
             }`}
           >
-            <Card.Body className="p-4 p-lg-5">
+            <Card.Body className="p-4 p-lg-5 ">
               <Card.Title
                 as="h5"
-                className="fw-bold text-white text-center mb-4"
+                className="fw-bold text-primary text-center mb-4"
               >
                 Send a Message
               </Card.Title>
 
               <Form onSubmit={handleSubmit}>
                 <Form.Group className="mb-3">
-                  <Form.Label className="fw-semibold text-white">
+                  <Form.Label className="fw-semibold text-primary">
                     Your Name
                   </Form.Label>
                   <Form.Control
                     type="text"
-                    className={`${
-                      isDark
-                        ? "bg-transparent"
-                        : "bg-dark bg-gradient text-white"
-                    }`}
+                    className="bg-transparent"
                     placeholder="Your name"
                     name="name"
                     value={formData.name}
@@ -144,16 +140,12 @@ export default function Contact() {
                   />
                 </Form.Group>
                 <Form.Group className="mb-3">
-                  <Form.Label className="fw-semibold text-white">
+                  <Form.Label className="fw-semibold text-primary">
                     Your Email
                   </Form.Label>
                   <Form.Control
                     type="email"
-                    className={`${
-                      isDark
-                        ? "bg-transparent"
-                        : "bg-dark bg-gradient text-white"
-                    }`}
+                    className="bg-transparent"
                     placeholder="example@email.com"
                     name="email"
                     value={formData.email}
@@ -162,16 +154,12 @@ export default function Contact() {
                   />
                 </Form.Group>
                 <Form.Group className="mb-4">
-                  <Form.Label className="fw-semibold text-white">
+                  <Form.Label className="fw-semibold text-primary">
                     Your Message
                   </Form.Label>
                   <Form.Control
                     as="textarea"
-                    className={`${
-                      isDark
-                        ? "bg-transparent"
-                        : "bg-dark bg-gradient text-white"
-                    }`}
+                    className="bg-transparent"
                     rows={4}
                     placeholder="Hello, I'd like to talk about..."
                     name="message"

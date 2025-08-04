@@ -18,7 +18,7 @@ const projects = [
     description:
       "Full-featured e-commerce platform with user authentication and payment processing.",
     image: project1,
-    tags: ["React", "BootstrapCSS", "MongoDB", "Node", "Express"],
+    tags: ["React", "Bootstrap", "MongoDB", "Node", "Express"],
     githubUrl: "https://github.com/aljog786/pkart",
     liveUrl: "#",
   },
@@ -28,19 +28,19 @@ const projects = [
     description:
       "Modern real estate app with chat facilities,authentication,etc.",
     image: project2,
-    tags: ["React", "BootstrapCSS", "MongoDB", "Node", "Express"],
+    tags: ["React", "Bootstrap", "MongoDB", "Node", "Express"],
     githubUrl: "https://github.com/aljog786/house-market-place",
     liveUrl: "#",
   },
   {
     id: 3,
-    title: "E-commerce Platform",
+    title: "NextLevel Food",
     description:
-      "Full-featured e-commerce platform with user authentication and payment processing.",
+      "A Next.js food app with a sleek UI and robust backend.",
     image: project3,
-    tags: ["React", "Node.js", "Stripe"],
-    githubUrl: "#",
-    liveUrl: "#",
+    tags: ["Nextjs", "Node.js", "Bootstrap", "MongoDB"],
+    githubUrl: "https://github.com/aljog786/NextLevel",
+    liveUrl: "https://next-level-786.vercel.app/",
   },
 ];
 
