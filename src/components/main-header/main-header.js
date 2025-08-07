@@ -3,7 +3,6 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import Link from "next/link";
 import NavLink from "./nav-link";
-import { useTheme } from "@/context/ThemeContext";
 import ThemeToggle from "../theme-toggler/theme-toggler";
 import { useLogoutMutation } from "@/slices/usersApiSlice";
 import { logout as logoutAction } from "@/slices/authSlice";
@@ -20,7 +19,6 @@ import {
 } from "react-bootstrap";
 
 export default function MainHeader() {
-  const { isDark } = useTheme();
 
   const router = useRouter();
 

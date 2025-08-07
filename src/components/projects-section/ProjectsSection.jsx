@@ -35,8 +35,7 @@ const projects = [
   {
     id: 3,
     title: "NextLevel Food",
-    description:
-      "A Next.js food app with a sleek UI and robust backend.",
+    description: "A Next.js food app with a sleek UI and robust backend.",
     image: project3,
     tags: ["Nextjs", "Node.js", "Bootstrap", "MongoDB"],
     githubUrl: "https://github.com/aljog786/NextLevel",

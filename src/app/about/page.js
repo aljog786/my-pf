@@ -1,4 +1,5 @@
 "use client";
+import { useSelector } from "react-redux";
 import { useTheme } from "@/context/ThemeContext";
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
 import { FaCode, FaPalette, FaProjectDiagram } from "react-icons/fa";
@@ -23,6 +24,8 @@ const cardContents = [
 ];
 
 export default function AboutPage() {
+  const { userInfo } = useSelector((state) => state.auth);
+
   const { isDark } = useTheme();
 
   const handleDownload = () => {
@@ -67,6 +70,7 @@ export default function AboutPage() {
                 variant="outline-primary"
                 className="px-4 rounded-pill"
                 onClick={handleDownload}
+                disabled={userInfo ? false : true}
               >
                 Download CV
               </Button>
