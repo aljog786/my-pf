@@ -47,12 +47,25 @@ export default function WaterLoader({
               <circle cx="100" cy="100" r="90" />
             </clipPath>
             <filter id="wl-shadow" x="-30%" y="-30%" width="160%" height="160%">
-              <feDropShadow dx="0" dy="6" stdDeviation="8" floodColor="#0b173d" floodOpacity="0.35" />
+              <feDropShadow
+                dx="0"
+                dy="6"
+                stdDeviation="8"
+                floodColor="#0b173d"
+                floodOpacity="0.35"
+              />
             </filter>
           </defs>
 
           {/* Outer ring */}
-          <circle cx="100" cy="100" r="94" fill="none" stroke="rgba(255,255,255,0.25)" strokeWidth="2" />
+          <circle
+            cx="100"
+            cy="100"
+            r="94"
+            fill="none"
+            stroke="rgba(255,255,255,0.25)"
+            strokeWidth="2"
+          />
 
           {/* Container */}
           <g clipPath="url(#wl-clip)" filter="url(#wl-shadow)">
@@ -97,11 +110,20 @@ export default function WaterLoader({
           </g>
 
           {/* Rim highlight */}
-          <circle cx="100" cy="100" r="92" fill="none" stroke="rgba(255,255,255,0.5)" strokeWidth="1.5" />
+          <circle
+            cx="100"
+            cy="100"
+            r="92"
+            fill="none"
+            stroke="rgba(255,255,255,0.5)"
+            strokeWidth="1.5"
+          />
         </svg>
       </div>
 
-      <span className="water-loader__label fw-medium text-secondary mt-3">{label}</span>
+      <span className="water-loader__label fw-medium text-secondary mt-3">
+        {label}
+      </span>
     </div>
   );
 }
