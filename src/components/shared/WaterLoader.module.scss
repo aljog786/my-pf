@@ -1,0 +1,78 @@
+.water-loader {
+  min-height: 60vh;
+}
+
+.water-loader__container {
+  position: relative;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(37, 99, 235, 0.25);
+}
+
+.water-loader__svg {
+  display: block;
+}
+
+/* Wave animations */
+.wl-waves {
+  transform: translateZ(0);
+}
+
+.wl-wave {
+  transform-origin: 50% 50%;
+  will-change: transform;
+}
+
+.wl-wave--back {
+  animation: wl-move 12s linear infinite;
+}
+
+.wl-wave--mid {
+  animation: wl-move 9s linear infinite;
+}
+
+.wl-wave--front {
+  animation: wl-move 6s linear infinite;
+}
+
+@keyframes wl-move {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(200px);
+  }
+}
+
+/* Bubbles */
+.wl-bubbles .wl-bubble {
+  animation: wl-bubble-rise 3.4s ease-in infinite;
+}
+.wl-bubbles .wl-bubble:nth-child(2) {
+  animation-delay: 0.6s;
+}
+.wl-bubbles .wl-bubble:nth-child(3) {
+  animation-delay: 1.2s;
+}
+.wl-bubbles .wl-bubble:nth-child(4) {
+  animation-delay: 1.8s;
+}
+
+@keyframes wl-bubble-rise {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-140px) scale(1.1);
+    opacity: 0;
+  }
+}
+
+/* Label */
+.water-loader__label {
+  letter-spacing: 0.2px;
+}

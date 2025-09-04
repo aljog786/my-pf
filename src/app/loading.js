@@ -1,5 +1,5 @@
-import Loading from "@/components/shared/Loading";
+import WaterLoader from "@/components/shared/WaterLoader";
 
 export default function RootLoading() {
-  return <Loading label="Loading page..." className="min-vh-50" />;
+  return <WaterLoader label="Loading page..." className="min-vh-50" size={180} />;
 }
