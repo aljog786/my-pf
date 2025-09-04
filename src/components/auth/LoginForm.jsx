@@ -60,6 +60,7 @@ export default function LoginForm({ onSwitchTab }) {
             placeholder="Email or username"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            autoComplete="username"
           />
         </Form.Group>
         <Form.Group className="mb-3">
@@ -69,6 +70,7 @@ export default function LoginForm({ onSwitchTab }) {
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            autoComplete="current-password"
           />
         </Form.Group>
         <div className="d-flex justify-content-between align-items-center mb-3">

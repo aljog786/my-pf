@@ -62,6 +62,7 @@ export default function RegisterForm({ onSwitchTab }) {
             value={name}
             onChange={(e) => setName(e.target.value)}
             required
+            autoComplete="name"
           />
         </Form.Group>
         <Form.Group className="mb-3">
@@ -72,6 +73,7 @@ export default function RegisterForm({ onSwitchTab }) {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
+            autoComplete="email"
           />
         </Form.Group>
         <Form.Group className="mb-3">
@@ -82,6 +84,7 @@ export default function RegisterForm({ onSwitchTab }) {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
+            autoComplete="new-password"
           />
         </Form.Group>
         <Form.Group className="mb-3">
@@ -92,6 +95,7 @@ export default function RegisterForm({ onSwitchTab }) {
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
             required
+            autoComplete="new-password"
           />
         </Form.Group>
         <Form.Check

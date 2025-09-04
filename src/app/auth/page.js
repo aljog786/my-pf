@@ -4,7 +4,7 @@ import { useTheme } from "@/context/ThemeContext";
 import { Container, Card, Tab, Nav } from "react-bootstrap";
 import LoginForm from "../../components/auth/LoginForm"; // adjust path as needed
 import RegisterForm from "../../components/auth/RegisterForm"; // adjust path as needed
-import "../auth/page.scss";
+import "./page.scss";
 
 export default function AuthPage() {
   const { isDark } = useTheme();
