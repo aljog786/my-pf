@@ -52,7 +52,7 @@ export default function MainHeader() {
 
   return (
     <>
-      <Navbar expand="lg" className=" px-3" sticky="top">
+      <Navbar expand="lg" className=" px-3" sticky="top" aria-label="Primary Navigation">
         <Container
           fluid
           className="d-flex justify-content-between align-items-center bg-dark bg-opacity-50 backdrop-blur rounded-3"
@@ -108,6 +108,7 @@ export default function MainHeader() {
             <ThemeToggle />
             <Navbar.Toggle
               aria-controls="main-navbar"
+              aria-expanded={showOffcanvas}
               onClick={toggleOffcanvas}
               className="border-0"
             />

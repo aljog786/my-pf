@@ -1,11 +1,18 @@
 import Hero from "@/components/hero/hero";
-import Contact from "@/components/contact/contact";
+import dynamic from "next/dynamic";
+import { Suspense } from "react";
+
+const Contact = dynamic(() => import("@/components/contact/contact"), {
+  loading: () => null,
+});
 
 export default function Home() {
   return (
     <>
       <Hero />
-      <Contact/>
+      <Suspense fallback={null}>
+        <Contact />
+      </Suspense>
     </>
   );
 }

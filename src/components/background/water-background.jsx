@@ -6,19 +6,32 @@ import { useGSAP } from "@gsap/react";
 
 const WaterBackground = () => {
   const [bubbles, setBubbles] = useState([]);
+  const [reducedMotion, setReducedMotion] = useState(false);
 
   const waveRef1 = useRef(null);
   const waveRef2 = useRef(null);
   const waveRef3 = useRef(null);
 
   useEffect(() => {
-    generateBubbles();
+    // Detect reduced motion preference
+    const mq = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)");
+    const handleChange = () => setReducedMotion(!!mq.matches);
+    if (mq) {
+      handleChange();
+      mq.addEventListener?.("change", handleChange);
+    }
+
+    generateBubbles(!!mq?.matches);
     const handleResize = () => generateBubbles();
     window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      mq?.removeEventListener?.("change", handleChange);
+    };
   }, []);
 
   useGSAP(() => {
+    if (reducedMotion) return; // Avoid heavy animations
     const waveMotion = (ref, x = "-100%", duration = 30, delay = 0) => {
       gsap.to(ref, {
         x,
@@ -34,18 +47,19 @@ const WaterBackground = () => {
       waveMotion(waveRef2.current, "-100%", 30, 12.5);
       waveMotion(waveRef3.current, "-100%", 40, 8);
     }
-  }, []);
+  }, [reducedMotion]);
 
-  const generateBubbles = () => {
-    const count = Math.floor((window.innerWidth * window.innerHeight) / 18000);
+  const generateBubbles = (reduce = reducedMotion) => {
+    const base = Math.floor((window.innerWidth * window.innerHeight) / 18000);
+    const count = reduce ? Math.max(4, Math.floor(base * 0.25)) : base;
     const newBubbles = Array.from({ length: count }).map((_, i) => ({
       id: i,
-      size: Math.random() * 12 + 6,
+      size: reduce ? Math.random() * 8 + 4 : Math.random() * 12 + 6,
       x: Math.random() * 100,
       y: Math.random() * 30 + 70,
-      duration: Math.random() * 8 + 4,
-      blur: Math.random() * 3,
-      opacity: Math.random() * 0.6 + 0.4,
+      duration: reduce ? Math.random() * 4 + 3 : Math.random() * 8 + 4,
+      blur: reduce ? Math.random() * 1.5 : Math.random() * 3,
+      opacity: reduce ? Math.random() * 0.4 + 0.3 : Math.random() * 0.6 + 0.4,
     }));
     setBubbles(newBubbles);
   };

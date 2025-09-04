@@ -58,7 +58,7 @@ export default function ProjectsSection() {
         </p>
 
         <Row className="g-4 justify-content-center">
-          {projects.map((project) => (
+          {projects.map((project, idx) => (
             <Col
               key={project.id}
               lg={4}
@@ -73,6 +73,8 @@ export default function ProjectsSection() {
                     alt={project.title}
                     className="rounded-5 p-3 object-fit-cover"
                     fill
+                    sizes="(min-width: 992px) 33vw, (min-width: 768px) 50vw, 100vw"
+                    priority={idx === 0}
                   />
                 </div>
                 <Card.Body

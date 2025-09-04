@@ -12,6 +12,7 @@ export default function NavLink({ href, children, className = "", onClick }) {
     <Link
       href={href}
       onClick={onClick}
+      aria-current={isActive ? "page" : undefined}
       className={`nav-link fs-5 ${className} ${
         isActive ? "fw-bold text-primary" : ""
       }`}
