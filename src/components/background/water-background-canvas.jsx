@@ -62,18 +62,80 @@ export default function WaterBackgroundCanvas() {
 
     const rand = (min, max) => Math.random() * (max - min) + min;
 
+  // Helper: map shape -> vertical speed multiplier
+  const shapeSpeedMul = (shape) => {
+    switch (shape) {
+      case "circle":
+        return 1;
+      case "triangle":
+        return 0.9;
+      case "square":
+        return 0.85;
+      case "diamond":
+        return 1.1; // fastest
+      case "star":
+        return 0.95;
+      default: {
+        // For regular polygons like pentagon, hexagon, ... decagon
+        const match = /(\d+)gon$/.exec(shape || "");
+        if (match) {
+          const sides = Math.max(3, Math.min(12, parseInt(match[1], 10) || 6));
+          // Slightly slower for more sides
+          return 1 - Math.min(0.3, (sides - 3) * 0.025);
+        }
+        return 1;
+      }
+    }
+  };
+
+  // Helpers to draw shapes centered at (0,0)
+  const drawRegularPolygon = (ctx, radius, sides) => {
+    const step = (Math.PI * 2) / sides;
+    ctx.moveTo(radius, 0);
+    for (let i = 1; i < sides; i++) {
+      const a = step * i;
+      ctx.lineTo(Math.cos(a) * radius, Math.sin(a) * radius);
+    }
+    ctx.closePath();
+  };
+
+  const drawStarShape = (ctx, outerR, points = 5) => {
+    const innerR = outerR * 0.5;
+    const step = Math.PI / points;
+    ctx.moveTo(0, -outerR);
+    for (let i = 1; i < points * 2; i++) {
+      const r = i % 2 === 0 ? outerR : innerR;
+      const a = -Math.PI / 2 + step * i;
+      ctx.lineTo(Math.cos(a) * r, Math.sin(a) * r);
+    }
+    ctx.closePath();
+  };
+
     const initBubbles = () => {
       const area = width * height;
       const base = Math.floor(area / 22000); // density scaler by viewport
       const count = reducedMotion ? Math.max(CONFIG.bubbleMin, Math.floor(base * 0.4)) : Math.min(CONFIG.bubbleMax, base + CONFIG.bubbleCountBase);
-      bubblesRef.current = Array.from({ length: count }).map(() => ({
-        x: rand(0, width),
-        y: rand(height * 0.4, height * 1.05),
-        r: rand(CONFIG.bubbleRadius[0], CONFIG.bubbleRadius[1]) * (reducedMotion ? 0.8 : 1),
-        vy: -rand(CONFIG.bubbleSpeedY[0], CONFIG.bubbleSpeedY[1]) / (reducedMotion ? 120 : 60),
-        drift: rand(-0.2, 0.2),
-        alpha: rand(0.2, 0.55),
-      }));
+      const shapes = ["circle", "triangle", "square", "diamond","pentagon","hexagon","heptagon","octagon","nonagon","decagon","star"];
+      bubblesRef.current = Array.from({ length: count }).map(() => {
+        const shape = shapes[Math.floor(Math.random() * shapes.length)];
+        const speedMul = shapeSpeedMul(shape);
+        let r = rand(CONFIG.bubbleRadius[0], CONFIG.bubbleRadius[1]) * (reducedMotion ? 0.8 : 1);
+        // Make non-circular shapes a bit larger for visibility
+        if (shape !== "circle") r *= 1.35;
+        let alpha = rand(0.28, 0.6); // ensure a higher minimum opacity
+        return {
+          x: rand(0, width),
+          y: rand(height * 0.4, height * 1.05),
+          r,
+          vy: -rand(CONFIG.bubbleSpeedY[0], CONFIG.bubbleSpeedY[1]) / (reducedMotion ? 120 : 60),
+          drift: rand(-0.2, 0.2),
+          alpha,
+          shape,
+          speedMul,
+          rot: rand(0, Math.PI * 2),
+          vr: rand(-0.01, 0.01),
+        };
+      });
     };
 
     const clamp01 = (v) => Math.max(0, Math.min(1, v));
@@ -152,17 +214,90 @@ export default function WaterBackgroundCanvas() {
       const bubbles = bubblesRef.current;
       ctx.save();
       for (let b of bubbles) {
-        b.y += b.vy; // vy is negative
+        // Update motion
+        b.y += b.vy * (b.speedMul || 1); // vy is negative
         b.x += Math.sin(t * 0.6 + (b.y * 0.02)) * b.drift;
+        b.rot += b.vr || 0;
+
+        // Respawn at bottom when off-screen
         if (b.y + b.r < -20) {
+          const shapes = ["circle", "triangle", "square", "diamond","pentagon","hexagon","heptagon","octagon","nonagon","decagon","star"];
+          const shape = shapes[Math.floor(Math.random() * shapes.length)];
+          const speedMul = shapeSpeedMul(shape);
           b.y = height + Math.random() * 60;
           b.x = Math.random() * width;
+          b.r = rand(CONFIG.bubbleRadius[0], CONFIG.bubbleRadius[1]) * (reducedMotion ? 0.8 : 1);
+          if (shape !== "circle") b.r *= 1.35;
+          b.vy = -rand(CONFIG.bubbleSpeedY[0], CONFIG.bubbleSpeedY[1]) / (reducedMotion ? 120 : 60);
+          b.drift = rand(-0.2, 0.2);
+          b.alpha = rand(0.28, 0.6);
+          b.shape = shape;
+          b.speedMul = speedMul;
+          b.rot = rand(0, Math.PI * 2);
+          b.vr = rand(-0.01, 0.01);
         }
+
+        // Draw
         ctx.globalAlpha = b.alpha;
         ctx.fillStyle = "#fff";
+        ctx.save();
+        ctx.translate(b.x, b.y);
+        if (b.shape && b.shape !== "circle") ctx.rotate(b.rot || 0);
         ctx.beginPath();
-        ctx.arc(b.x, b.y, b.r, 0, Math.PI * 2);
+        switch (b.shape) {
+          case "triangle": {
+            const s = b.r * 2;
+            // Equilateral triangle centered at 0,0
+            const h = (Math.sqrt(3) / 2) * s;
+            ctx.moveTo(0, -h / 2);
+            ctx.lineTo(-s / 2, h / 2);
+            ctx.lineTo(s / 2, h / 2);
+            ctx.closePath();
+            break;
+          }
+          case "square": {
+            const s = b.r * 2;
+            ctx.rect(-s / 2, -s / 2, s, s);
+            break;
+          }
+          case "diamond": {
+            const s = b.r * 2;
+            ctx.moveTo(0, -s / 1.4);
+            ctx.lineTo(s / 1.4, 0);
+            ctx.lineTo(0, s / 1.4);
+            ctx.lineTo(-s / 1.4, 0);
+            ctx.closePath();
+            break;
+          }
+          case "pentagon":
+            drawRegularPolygon(ctx, b.r, 5);
+            break;
+          case "hexagon":
+            drawRegularPolygon(ctx, b.r, 6);
+            break;
+          case "heptagon":
+            drawRegularPolygon(ctx, b.r, 7);
+            break;
+          case "octagon":
+            drawRegularPolygon(ctx, b.r, 8);
+            break;
+          case "nonagon":
+            drawRegularPolygon(ctx, b.r, 9);
+            break;
+          case "decagon":
+            drawRegularPolygon(ctx, b.r, 10);
+            break;
+          case "star":
+            drawStarShape(ctx, b.r * 1.3, 5);
+            break;
+          case "circle":
+          default: {
+            ctx.arc(0, 0, b.r, 0, Math.PI * 2);
+            break;
+          }
+        }
         ctx.fill();
+        ctx.restore();
       }
       ctx.restore();
     };
