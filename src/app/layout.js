@@ -2,7 +2,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "../styles/_global.scss";
 import { Montserrat } from "next/font/google";
 import Providers from "@/components/providers/Providers";
-import WaterBackground from "@/components/background/water-background";
+import WaterBackgroundCanvas from "@/components/background/water-background-canvas";
 import MainHeader from "@/components/main-header/main-header";
 import Footer from "@/components/footer/footer";
 
@@ -26,7 +26,7 @@ export default function RootLayout({ children }) {
           Skip to content
         </a>
         <Providers>
-          <WaterBackground />
+          <WaterBackgroundCanvas />
           <div className="position-relative z-1 d-flex flex-column flex-grow-1">
             <MainHeader />
             <main id="main-content" className="flex-grow-1" role="main" aria-live="polite">
