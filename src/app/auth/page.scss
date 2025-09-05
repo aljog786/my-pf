@@ -1,1 +1,58 @@
 @use "../../styles/global" as *;
+
+/* Auth page theme-aware card styles */
+.auth-card {
+  border-radius: 1.25rem; /* rounded-4 */
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 10px 30px rgba(2, 6, 23, 0.25);
+  backdrop-filter: blur(8px);
+
+  /* Light (day) mode: attractive glass gradient */
+  :root[data-bs-theme="light"] & {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.7) 0%, rgba(245, 247, 255, 0.6) 40%, rgba(230, 236, 255, 0.5) 100%),
+      radial-gradient(1200px 400px at 50% -200px, rgba(33, 150, 243, 0.25), transparent 60%);
+    border-color: rgba(255, 255, 255, 0.45);
+    box-shadow: 0 8px 30px rgba(30, 64, 175, 0.25), 0 2px 8px rgba(2, 6, 23, 0.08);
+  }
+
+  /* Dark mode: subtle translucent panel */
+  :root[data-bs-theme="dark"] & {
+    background: linear-gradient(180deg, rgba(17, 24, 39, 0.6) 0%, rgba(17, 24, 39, 0.4) 100%);
+    border-color: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+  }
+}
+
+/* Improve active pills visibility in light mode */
+:root[data-bs-theme="light"] .nav-pills .nav-link.active {
+  color: #fff !important;
+  background: linear-gradient(135deg, #2563eb 0%, #0ea5e9 100%);
+}
+
+/* Subtle hover on non-active pills */
+.nav-pills .nav-link:not(.active):hover {
+  background-color: rgba(2, 132, 199, 0.12);
+}
+
+/* Inputs inside auth card: ensure readability by theme */
+:root[data-bs-theme="light"] .auth-card .form-control {
+  background-color: rgba(255, 255, 255, 0.7) !important;
+  border: 1px solid rgba(15, 23, 42, 0.08) !important; /* slate-900 */
+  color: #0f172a !important;
+}
+
+:root[data-bs-theme="light"] .auth-card .form-control::placeholder {
+  color: rgba(15, 23, 42, 0.55) !important;
+}
+
+:root[data-bs-theme="dark"] .auth-card .form-control {
+  background-color: rgba(255, 255, 255, 0.04) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  color: #e5e7eb !important; /* gray-200 */
+}
+
+:root[data-bs-theme="dark"] .auth-card .form-control::placeholder {
+  color: rgba(229, 231, 235, 0.6) !important;
+}
+

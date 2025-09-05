@@ -9,9 +9,9 @@ export default function ThemeToggle() {
   return (
     <button onClick={toggle} className="btn border-0 bg-transparent p-0">
       {isDark ? (
-        <FaMoon size={20} className="text-secondary" />
-      ) : (
         <FaSun size={20} className="text-secondary" />
+      ) : (
+        <FaMoon size={20} className="text-secondary" />
       )}
     </button>
   );

@@ -84,7 +84,7 @@ export default function ProjectsSection() {
                     {project.title}
                   </Card.Title>
                   <Card.Text
-                    className={`${isDark ? "text-dark" : "text-white"}`}
+                    className={`text-white`}
                   >
                     {project.description}
                   </Card.Text>
@@ -100,9 +100,7 @@ export default function ProjectsSection() {
                       href={project.githubUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className={`text-decoration-none ${
-                        isDark ? "text-dark" : "text-white"
-                      }`}
+                      className={`text-decoration-none text-white`}
                     >
                       <DiGithubFull size={25} />
                     </Link>
@@ -110,9 +108,7 @@ export default function ProjectsSection() {
                       href={project.liveUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className={`text-decoration-none ${
-                        isDark ? "text-dark" : "text-white"
-                      }`}
+                      className={`text-decoration-none text-white`}
                     >
                       <IoLinkSharp size={25} />
                     </Link>

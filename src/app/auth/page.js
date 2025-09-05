@@ -12,11 +12,7 @@ export default function AuthPage() {
 
   return (
     <Container className="d-flex justify-content-center align-items-center my-3">
-      <Card
-        className={`p-4 rounded-4 ${
-          isDark ? "bg-transparent border-1" : "bg-dark  bg-gradient border-0"
-        }`}
-      >
+      <Card className="p-4 rounded-4 auth-card">
         <Tab.Container activeKey={key} onSelect={(k) => setKey(k)}>
           <Nav variant="pills" className="mb-3 justify-content-center">
             <Nav.Item>

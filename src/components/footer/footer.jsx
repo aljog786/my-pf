@@ -5,7 +5,7 @@ import { FaSquareXTwitter } from "react-icons/fa6";
 const socialIcons = [
   {
     logo: <FaLinkedin size={20} className="text-white" />,
-    path: "https://www.linkedin.com/in/aljo-george-844911223/",
+    path: "https://www.linkedin.com/in/aljog786/",
   },
   {
     logo: <FaInstagram size={20} className="text-white" />,
